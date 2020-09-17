@@ -42,7 +42,7 @@ yarg.command({
         type: 'string'
       }
 },
-    handler: function (argv) {
+    handler:  (argv) => {
       file.addNote(argv.title, argv.body)
     }
 })
@@ -58,7 +58,7 @@ yarg.command({
       type: 'string'
       }
     },
-    handler: function (argv) {
+    handler: (argv) => {
         file.removeNote(argv.title)
     }
 })
@@ -67,8 +67,20 @@ yarg.command({
 yarg.command({
   command: "list",
   describe: "List a note!",
-  handler: function () {
-    console.log("Listing a note");
+  // builder: {
+  //   title: {
+  //     describe: 'Note title',
+  //     demandOption: true,
+  //     type: 'string'
+  //   },
+  //   body: {
+  //     describe: 'Note body',
+  //     demandOption: true,
+  //     type: 'string'
+  //   }
+  // },
+  handler: () => {
+    file.listNode();
   },
 });
 
@@ -76,7 +88,7 @@ yarg.command({
 yarg.command({
   command: "read",
   describe: "Read a note!",
-  handler: function () {
+  handler: () => {
     console.log("Reading a note");
   },
 });
