@@ -19,3 +19,13 @@ request({ url: url, json: true }, (error, response) => {
     );
     console.log("The humidity is "+ response.body.main.humidity+"%")
 })
+
+const geocodeUrl =
+    "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiY29kZXItMDgiLCJhIjoiY2tmOW9yYzJwMG8yZDJycWc2Yjd5OXNxMSJ9.NpCin6ejDHnPE53w_f9awg";
+  
+request({ url: geocodeUrl, json: true }, (error, response) => {
+    console.log("The latitude is " + response.body.features[0].center[1])
+    console.log(
+      "The longitude is " + response.body.features[0].center[0]
+    );
+})
