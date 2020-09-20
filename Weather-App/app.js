@@ -27,8 +27,7 @@ request({ url: url, json: true }, (error, response) => {
 })
 
 const geocodeUrl =
-    "https://api.mapbox.com/geocoding/v5/mapbox.places/chandigarh.json?access_token=pk.eyJ1IjoiY29kZXItMDgiLCJhIjoiY2tmOW9yYzJwMG8yZDJycWc2Yjd5OXNxMSJ9.NpCin6ejDHnPE53w_f9awg";
-  
+  "https://api.mapbox.com/geocoding/v5/mapbox.places/chandigarh.json?access_token=pk.eyJ1IjoiY29kZXItMDgiLCJhIjoiY2tmOW9yYzJwMG8yZDJycWc2Yjd5OXNxMSJ9.NpCin6ejDHnPE53w_f9awg";
 request({ url: geocodeUrl, json: true }, (error, response) => {
   if (error) {
     console.log("Unable to connect to web services! Please check your internet connection!")
@@ -36,6 +35,8 @@ request({ url: geocodeUrl, json: true }, (error, response) => {
     console.log("Unable to find the Location")
   } else {
     console.log("The latitude is " + response.body.features[0].center[1])
-    console.log("The longitude is " + response.body.features[0].center[0] )
+    console.log(
+      "The longitude is " + response.body.features[0].center[0]
+    );
   }
-})
+  })
