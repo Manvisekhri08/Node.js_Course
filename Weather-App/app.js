@@ -5,7 +5,7 @@ var weather = require("openweather-apis")
 weather.setLang("it");
 
 const url =
-  "http://api.openweathermap.org/data/2.5/weather?q=rajasthan&&units=metric&APPID=328920666f8770f7287a302198ad888b";
+  "http://api.openweathermap.org/data/2.5/weather?q=rajasthan&&units=metric&APPID=<>";
   
 request({ url: url, json: true }, (error, response) => {
     // const data = JSON.parse(response.body)
