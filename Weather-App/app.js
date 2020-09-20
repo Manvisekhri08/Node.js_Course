@@ -35,8 +35,6 @@ request({ url: geocodeUrl, json: true }, (error, response) => {
     console.log("Unable to find the Location")
   } else {
     console.log("The latitude is " + response.body.features[0].center[1])
-    console.log(
-      "The longitude is " + response.body.features[0].center[0]
-    );
+    console.log("The longitude is " + response.body.features[0].center[0]);
   }
   })
