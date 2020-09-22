@@ -9,26 +9,26 @@ const chalk = require('chalk')
 if (!address) {
   console.log(chalk.bgRed("Please provide an address!"))
 } else {
-  geoCode(address, (error, data) => {
+  geoCode(address, (error, { location, latitude, longitude }) => {
     if (error) {
       return console.log(error);
     }
 
-    forecast(data.location, (error, forecastdata) => {
+    forecast(location, (error, forecastdata) => {
       if (error) {
         return console.log(error);
       }
       console.log(
         "The latitude of " +
-          data.location +
+          location +
           " is " +
-          chalk.yellow(data.latitude)
+          chalk.yellow(latitude)
       );
       console.log(
         "The longitude is " +
-          data.location +
+          location +
           " is " +
-          chalk.yellow(data.longitude)
+          chalk.yellow(longitude)
       );
       console.log(forecastdata);
     });

@@ -5,22 +5,22 @@ const forecast = (address, callback) => {
         "http://api.openweathermap.org/data/2.5/weather?q=" +
         encodeURIComponent(address) +
         "&&units=metric&APPID=328920666f8770f7287a302198ad888b";
-    request({ url: url, json: true }, (error, response) => {
+    request({ url, json: true }, (error, { body }) => {
         if (error) {
             callback(
                 "Unable to connect to web services! Please check your internet connection!",
                 undefined
             );
-        } else if (response.body.error) {
+        } else if (body.error) {
             callback(
                 "Unable to find the Location, Try another search!",
                 undefined
             );
         } else {
             callback(undefined, {
-                 description: 'The weather description: ' + response.body.weather[0].description,
-                humidity: 'The humidity level is ' + response.body.main.humidity,
-                temperature:'The temperature out there is ' + response.body.main.temp + '°C'
+                 description: 'The weather description: ' + body.weather[0].description,
+                humidity: 'The humidity level is ' + body.main.humidity,
+                temperature:'The temperature out there is ' + body.main.temp + '°C'
             });
         }
     });
