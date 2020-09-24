@@ -1,17 +1,27 @@
 const express = require('express')
 
+const path = require('path')
+
 const app = express()
 
-app.get('', (req, res) => {
-    res.send('<h1>hello express!</h1>')  // html
-})
+const publicDirectory = path.join(__dirname, "../public");
 
-app.get("/help", (req, res) => {
-    res.send({                         // json
-        name: 'Manvi',
-        age: 20
-  });
-});
+app.use(express.static(publicDirectory));
+
+// app.get('', (req, res) => {
+//     res.send('<h1>hello express!</h1>')  // html
+// })
+
+// app.get("help.html", (req, res) => {
+//     res.send({                         // json
+//         name: 'Manvi',
+//         age: 20
+//   });
+// });
+
+// app.get("about.html", (req, res) => {
+//   res.send("<h1>About</h1>");
+// });
 
 app.get("/weather", (req, res) => {
     res.send([{
@@ -19,10 +29,6 @@ app.get("/weather", (req, res) => {
     }, {
         location: 'Pasadena'
     }]);                  // arry of objects
-});
-
-app.get("/about", (req, res) => {
-  res.send("<h1>About</h1>");
 });
 
 app.listen(3000, () => {
