@@ -4,10 +4,15 @@ const path = require('path')
 
 const app = express()
 
+// Define paths for Express Configuration
 const publicDirectory = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../templates");
 
+// Setup handlebars engine and view location
 app.set('view engine', 'hbs')
+app.set("views", viewsPath);
 
+// Setup static directory to serve
 app.use(express.static(publicDirectory));
 
 app.get('', (req, res) => {
