@@ -50,6 +50,22 @@ app.get("/weather", (req, res) => {
     }]);                  // arry of objects
 });
 
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    name: "Manvi Sekhri",
+    errorMessage: "Help article not found!",
+  });
+});
+
+app.get("*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    name: "Manvi Sekhri",
+    errorMessage: "Page not found!",
+  });
+})
+
 app.listen(3000, () => {
     console.log('SErver is up on port 3000!')
 })
