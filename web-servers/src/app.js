@@ -4,6 +4,10 @@ const path = require('path')
 
 const hbs = require('hbs')
 
+const geocode = require('./utils/geocode')
+
+const forecast = require('./utils/forecast')
+
 const app = express()
 
 // Define paths for Express Configuration
@@ -49,11 +53,28 @@ app.get("/weather", (req, res) => {
       error: 'You must provide an address'
     })
   }
-  res.send([{
-    forecast: 'Cloudy',
-    location: 'Pasadena',
-    address: req.query.address
-  }]);                  // array of objects
+
+  geocode(req.query.address, (error, { location, latitude, longitude }) => {
+    if (error) {
+      return res.send({
+        error,
+      });
+    }
+    forecast(location, (error, forecastdata) => {
+      if (error) {
+        return res.send({
+          error,
+        });
+      }
+      res.send({
+        forecast: forecastdata,
+        location,
+        latitude,
+        longitude,
+        address: req.query.address
+      })
+    })
+  });
 });
 
 app.get("/products", (req, res) => {
@@ -85,22 +106,7 @@ app.get("*", (req, res) => {
 })
 
 app.listen(3000, () => {
-    console.log('SErver is up on port 3000!')
+    console.log('Server is up on port 3000!')
 })
 
 
-
-// app.get('', (req, res) => {
-//     res.send('<h1>hello express!</h1>')  // html
-// })
-
-// app.get("help.html", (req, res) => {
-//     res.send({                         // json
-//         name: 'Manvi',
-//         age: 20
-//   });
-// });
-
-// app.get("about.html", (req, res) => {
-//   res.send("<h1>About</h1>");
-// });
